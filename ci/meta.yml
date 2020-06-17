@@ -17,9 +17,9 @@ meta:
             - |
               python bootstrap_terraform.py
               cp terraform.tf ../terraform-config
-          dir: dataworks-repo-template-terraform
+          dir: dataworks-development-tools
         inputs:
-          - name: dataworks-repo-template-terraform
+          - name: dataworks-development-tools
         outputs:
           - name: terraform-config
       params:
@@ -44,9 +44,9 @@ meta:
               terraform init
               terraform plan -out terraform.plan
               terraform apply -auto-approve terraform.plan
-          dir: dataworks-repo-template-terraform
+          dir: dataworks-development-tools
         inputs:
-          - name: dataworks-repo-template-terraform
+          - name: dataworks-development-tools
           - name: terraform-config
       params:
         TF_CLI_ARGS_apply: -lock-timeout=300s
@@ -70,9 +70,9 @@ meta:
               terraform workspace show
               terraform init
               terraform plan -detailed-exitcode
-          dir: dataworks-repo-template-terraform
+          dir: dataworks-development-tools
         inputs:
-          - name: dataworks-repo-template-terraform
+          - name: dataworks-development-tools
           - name: terraform-config
       params:
         TF_CLI_ARGS_plan: -lock-timeout=300s
