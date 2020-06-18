@@ -18,7 +18,7 @@ jobs:
           dataworks-development-tools: dataworks-development-tools-pr
         params:
           TF_WORKSPACE: 'default'
-          DETAILED_EXIT_CODE: ''
+          DETAILED_EXITCODE: ''
         on_failure:
           put: dataworks-development-tools-pr
           params:
