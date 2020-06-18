@@ -69,7 +69,7 @@ meta:
               cp ../terraform-config/terraform.tf .
               terraform workspace show
               terraform init
-              terraform plan -detailed-exitcode
+              terraform plan $DETAILED_EXIT_CODE
           dir: dataworks-development-tools
         inputs:
           - name: dataworks-development-tools
@@ -77,3 +77,4 @@ meta:
       params:
         TF_CLI_ARGS_plan: -lock-timeout=300s
         TF_INPUT: "false"
+        DETAILED_EXIT_CODE: -detailed-exitcode
