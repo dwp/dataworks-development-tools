@@ -1,5 +1,5 @@
 jobs:
-  - name: dataworks-development-tools
+  - name: dataworks-development-tools-pr
     plan:
       - get: dataworks-development-tools-pr
         trigger: true
@@ -10,22 +10,15 @@ jobs:
           status: pending
         input_mapping:
           dataworks-development-tools: dataworks-development-tools-pr
-      - task: basic-git-test
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source: { repository: alpine/git, tag: "latest" }
-          inputs:
-            - name: dataworks-development-tools-pr
-          run:
-            path: /bin/sh
-            args:
-              - -xce
-              - |
-                cd dataworks-development-tools-pr
-                git log --graph --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s" > log.txt
-                cat log.txt
+      - .: (( inject meta.plan.terraform-bootstrap ))
+        input_mapping:
+          dataworks-development-tools: dataworks-development-tools-pr
+      - .: (( inject meta.plan.terraform-plan ))
+        input_mapping:
+          dataworks-development-tools: dataworks-development-tools-pr
+        params:
+          TF_WORKSPACE: 'default'
+          DETAILED_EXITCODE: ''
         on_failure:
           put: dataworks-development-tools-pr
           params:

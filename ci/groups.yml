@@ -1,4 +1,8 @@
 groups:
+  - name: master
+    jobs:
+      - development
+      - management-dev
   - name: pull-request
     jobs:
-      - dataworks-development-tools
+      - dataworks-development-tools-pr
