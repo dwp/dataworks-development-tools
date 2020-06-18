@@ -49,12 +49,4 @@ locals {
           {{ key }} = "{{ value }}"{% endfor %}
       } {% endfor %}
   }
-
-  whitelist_cidr_blocks = [
-    {% set doiranges = doi["cidr_blocks"].split(',') %}
-    {% for cidr in doiranges %}
-    "{{ cidr }}",
-    {% endfor %}
-    "{{ucfs["team_cidr_block"]}}"
-  ]
 }
