@@ -2,11 +2,19 @@
 
 ## Infrastructure for development tools
 
-This repo contains Makefile and base terraform folders and jinja2 files to fit the standard pattern.
-This repo is a base to create new Terraform repos, renaming the template files and adding the githooks submodule, making the repo ready for use.
-
-Running aviator will create the pipeline required on the AWS-Concourse instance, in order pass a mandatory CI ran status check.  this will likely require you to login to Concourse, if you haven't already.
-
-
 After cloning this repo, please run:  
 `make bootstrap`
+
+This repo contains infrastructure for development tools used by DataWorks. The infrastructure is deployed and available in `development` and `management-dev` environments only. 
+
+## How to provision a Cloud9 IDE
+
+As Cloud9 does not currently support `Always encrypt new EBS volumes` setting it has to be temporarily disabled while creating a Cloud9 environment for the first time.
+
+In AWS console, 
+1. Temporarily disable EBS encryption: 
+    1. Navigate to EC2, click on `EC2 Dashboard` (top left) and click on `EBS Encryption` (top right);
+    1. Verify that `Always encrypt new EBS volumes` setting is `Enabled`;
+    1. Click `Manage`, uncheck `Always encrypt new EBS volumes` and click `Update EBS encryption`.
+1. Proceed to create a Cloud9 environment as normal.
+1. Re-enable `Always encrypt new EBS volumes` setting.
