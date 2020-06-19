@@ -9,7 +9,7 @@ This repo contains infrastructure for development tools used by DataWorks. The i
 
 ## How to provision a Cloud9 IDE
 
-As Cloud9 does not currently support `Always encrypt new EBS volumes` setting it has to be temporarily disabled while creating a Cloud9 environment for the first time.
+As Cloud9 does not currently support `Always encrypt new EBS volumes` setting it has to be temporarily disabled while creating a Cloud9 environment for the first time in `development` environment.
 
 In AWS console, 
 1. Temporarily disable EBS encryption: 
