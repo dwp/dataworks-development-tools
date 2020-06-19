@@ -2,7 +2,7 @@
 
 ## Infrastructure for development tools
 
-This repo contains infrastructure for development tools used by Dataworks. The infrastructure is deployed and available in `development` and `management-dev` environments only. 
+This repo contains infrastructure for development tools used by DataWorks. The infrastructure is deployed and available in `development` and `management-dev` environments only. 
 
 ## How to provision a Cloud9 IDE
 
@@ -15,5 +15,4 @@ In AWS console,
     1. Click `Manage`, uncheck `Always encrypt new EBS volumes` and click `Update EBS encryption`.
 1. Proceed to create a Cloud9 environment as normal.
 1. Re-enable `Always encrypt new EBS volumes` setting.
-
 
