@@ -11,3 +11,42 @@ terraform {
   }
 }
 
+
+provider "aws" {
+  version = "~> 2.66.0"
+  region = "{{provider_region}}"
+
+  assume_role {
+    role_arn = "arn:aws:iam::${lookup(local.account, local.environment)}:role/${var.assume_role}"
+  }
+}
+
+locals {
+  name        = "dataworks-development-tools"
+  environment = terraform.workspace == "default" ? "development" : terraform.workspace
+
+  account = {
+    {% for key, value in accounts.items() %}
+      {{key}} = "{{value}}"
+    {% endfor %}
+  }
+
+  common_tags = {
+    {% for key, value in common_tags.items() %}
+      {{key}} = "{{value}}"
+    {% endfor %}
+    Name         = local.name
+    Environment  = local.environment
+    Application  = local.name
+    Persistence  = "Ignore"
+    AutoShutdown = "False"
+  }
+
+  cidr_block = {
+  {% for environment, ranges in cidr_block.items() %}
+      {{ environment }} = {
+        {% for key, value in ranges.items() %}
+          {{ key }} = "{{ value }}"{% endfor %}
+      } {% endfor %}
+  }
+}
