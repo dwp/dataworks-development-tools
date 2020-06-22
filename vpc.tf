@@ -27,7 +27,7 @@ resource "aws_subnet" "public" {
 
 resource "aws_default_route_table" "public" {
   default_route_table_id = module.dev_tools_vpc.vpc.main_route_table_id
-  tags                   = merge(local.common_tags, { Name = "${local.name}-public" })
+  tags       = merge(local.common_tags, { Name = "${local.name}-public" })
 
   route {
     cidr_block = "0.0.0.0/0"
