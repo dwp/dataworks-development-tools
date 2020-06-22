@@ -1,0 +1,40 @@
+name: Terraform fmt
+
+on:
+  pull_request:
+    paths-ignore:
+      - '.githooks/**'
+      - '.github/workflows/**'
+      - '.ci/**'
+
+jobs:
+  terraform-fmt:
+    name: terraform-fmt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform validate
+        run: |
+          terraform init -backend=false
+          terraform validate
+
+      - name: Check formatting
+        id: check-formatting
+        run: terraform fmt -recursive -check=true
+        continue-on-error: true
+
+      - name: If needed, commit fmt changes to the pull request
+        if: ${{ steps.check-formatting.outcome == 'failure' }}
+        run: |
+          terraform fmt -recursive
+          git config --global user.name ${{ secrets.CI_GITHUB_USERNAME }}
+          git config --global user.email ${{ secrets.CI_GITHUB_EMAIL }}
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "Format with Terraform fmt"
+          git push
