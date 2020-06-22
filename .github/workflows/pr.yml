@@ -18,11 +18,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Terraform validate
-        run: |
-          terraform init -backend=false
-          terraform validate
-
       - name: Check formatting
         id: check-formatting
         run: terraform fmt -recursive -check=true
