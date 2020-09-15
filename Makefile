@@ -26,6 +26,6 @@ terraform-apply: ## Run `terraform apply` from repo root
 	terraform apply
 .PHONY: git-hooks
 git-hooks: ## Set up hooks in .githooks
-  @git submodule update --init .githooks ; \
-  git config core.hooksPath .githooks \
+	@git submodule update --init .githooks ; \
+	git config core.hooksPath .githooks \
 

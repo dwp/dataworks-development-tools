@@ -1,14 +1,20 @@
 module "dev_tools_vpc" {
-  source                                     = "dwp/vpc/aws"
-  version                                    = "2.0.12"
-  vpc_name                                   = "dev-tools"
-  region                                     = var.region
-  vpc_cidr_block                             = local.cidr_block[local.environment]["dev-tools-vpc"]
-  gateway_vpce_route_table_ids               = []
-  interface_vpce_source_security_group_count = 0
-  interface_vpce_source_security_group_ids   = []
-  interface_vpce_subnet_ids                  = aws_subnet.public.*.id
-  common_tags                                = local.common_tags
+  source                                   = "dwp/vpc/aws"
+  version                                  = "3.0.8"
+  vpc_name                                 = "dev-tools"
+  region                                   = var.region
+  vpc_cidr_block                           = local.cidr_block[local.environment]["dev-tools-vpc"]
+  gateway_vpce_route_table_ids             = []
+  interface_vpce_source_security_group_ids = []
+  interface_vpce_subnet_ids                = aws_subnet.public.*.id
+  common_tags                              = local.common_tags
+
+  aws_vpce_services = [
+    "logs",
+    "monitoring",
+    "ssm",
+    "ssmmessages"
+  ]
 }
 
 resource "aws_internet_gateway" "igw" {
