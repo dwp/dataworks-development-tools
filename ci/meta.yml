@@ -32,8 +32,8 @@ meta:
           type: docker-image
           source:
             repository: hashicorp/terraform
-            version: ((dataworks.terraform_version))
-            tag: ((dataworks.terraform_version))
+            version: ((dataworks.terraform_13_version))
+            tag: ((dataworks.terraform_13_version))
         run:
           path: sh
           args:
@@ -59,8 +59,8 @@ meta:
           type: docker-image
           source:
             repository: hashicorp/terraform
-            version: ((dataworks.terraform_version))
-            tag: ((dataworks.terraform_version))
+            version: ((dataworks.terraform_13_version))
+            tag: ((dataworks.terraform_13_version))
         run:
           path: sh
           args:
@@ -69,7 +69,7 @@ meta:
               cp ../terraform-config/terraform.tf .
               terraform workspace show
               terraform init
-              terraform plan $DETAILED_EXITCODE
+              terraform plan $DETAILED_EXIT_CODE
           dir: dataworks-development-tools
         inputs:
           - name: dataworks-development-tools
@@ -77,4 +77,4 @@ meta:
       params:
         TF_CLI_ARGS_plan: -lock-timeout=300s
         TF_INPUT: "false"
-        DETAILED_EXITCODE: -detailed-exitcode
+        DETAILED_EXIT_CODE: -detailed-exitcode
