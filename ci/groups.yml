@@ -6,3 +6,6 @@ groups:
   - name: pull-request
     jobs:
       - dataworks-development-tools-pr
+  - name: update-pipeline
+    jobs:
+      - update-pipeline
