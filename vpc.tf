@@ -1,6 +1,6 @@
 module "dev_tools_vpc" {
   source                                   = "dwp/vpc/aws"
-  version                                  = "3.0.8"
+  version                                  = "3.0.15"
   vpc_name                                 = "dev-tools"
   region                                   = var.region
   vpc_cidr_block                           = local.cidr_block[local.environment]["dev-tools-vpc"]
